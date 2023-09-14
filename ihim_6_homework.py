@@ -1,5 +1,69 @@
-"""This file contains the 6th homework of IHIM Python course."""
-# %%
+"""Game and 6"""
+
+# Game
+#%%
+from random import randint
+
+logo = """
+   ___                       _____                  __                 _
+  / _ \_   _  ___  ___ ___  /__   \ |__   ___    /\ \ \_   _ _ __ ___ | |__   ___ _ __
+ / /_\/ | | |/ _ \/ __/ __|   / /\/ '_ \ / _ \  /  \/ / | | | '_ ` _ \| '_ \ / _ \ '__|
+/ /_\| |_| |  __/\__ \__ \  / /  | | | |  __/ / /\  /| |_| | | | | | | |_) |  __/ |
+\____/ \__,_|\___||___/___/  \/   |_| |_|\___| \_\ \/  \__,_|_| |_| |_|_.__/ \___|_|
+
+"""
+
+print(logo)
+
+EASY_LEVEL_TURNS = 10
+HARD_LEVEL_TURNS = 5
+
+def check_answer(guess, answer, turns):
+    """Checks the player's guess against the answer and returns the number of turns remaining."""
+    if guess > answer:
+        print("Too high.")
+        return turns - 1
+    elif guess < answer:
+        print("Too low.")
+        return turns - 1
+    else:
+        print(f"You got it! The answer was {answer}.")
+
+def set_difficulty():
+    """Prompts the player to choose a difficulty and returns the number of turns based on the chosen difficulty."""
+    level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+    if level == "easy":
+        return EASY_LEVEL_TURNS
+    else:
+        return HARD_LEVEL_TURNS
+
+def game():
+    """Runs the number guessing game."""
+    print("Welcome to the Number Guessing Game!")
+    print("I'm thinking of a number between 1 and 100.")
+    answer = randint(1, 100)
+
+    turns = set_difficulty()
+
+    guess = 0
+
+    while guess != answer:
+        print(f"You have {turns} attempts remaining to guess the number.")
+        guess = int(input("Make a guess: "))
+        turns = check_answer(guess, answer, turns)
+        if turns == 0:
+            print("You've run out of guesses. You lose.")
+            return
+        elif guess != answer:
+            print("Guess again.")
+
+game()
+
+
+#%%
+
+
+
 
 # Exercise A
 
@@ -71,11 +135,11 @@ def minimum(*numbers):
     return minimum_number
 
 
-print(minimum(2, 4, 3, 2, 4, 2, 4, 3, 2, 6, 7))
+print(minimum(2, 4, 3, 2, 4, 2, 4, 3, 2, 6, 6, 7, 7))
 
-# %%
-
+#%%
 # Exercise 2
+
 
 from random import randint
 
@@ -105,53 +169,3 @@ def minimum(numbers):
 
 minimum(numbers)
 
-
-# %%
-
-# Range function revisited
-"""
-start = int(input("Enter the start value: "))
-stop = int(input("Enter the stop value: "))
-step = int(input("Enter the step value: "))
-
-result = []
-
-if step > 0:
-    number = start
-
-    while number < stop:
-        result.append(number)
-        number += step
-
-elif step < 0:
-    number = start
-
-    while number > stop:
-        result.append(number)
-        number += step
-
-# elif step == 0:
-#     print("Step can't be zero.")
-
-
-print(result)
-
-"""
-# %%
-"""
-
-# Zip function revisited
-
-
-list_1 = [1, 2, 3]
-list_2 = ["a", "b", "c"]
-
-min_length = min(len(list_1), len(list_2))
-
-for i in range(min_length):
-    x = list_1[i]
-    y = list_2[i]
-
-    print(x, y)
-
-"""
